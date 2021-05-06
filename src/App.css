@@ -9,4 +9,9 @@ body {
     color: #FFF;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    padding-left: 30px;
+}
+
+.lists {
+    margin-top: -100px;
 }

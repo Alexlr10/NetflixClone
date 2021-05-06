@@ -12,7 +12,7 @@ const API_BASE = 'https://api.themoviedb.org/3';
 - documentários
 */
 
-const basicFetch = async(endpoint) =>{
+const basicFetch = async (endpoint) => {
     const req = await fetch(`${API_BASE}${endpoint}`);
     const json = await req.json();
     return json;
@@ -39,28 +39,47 @@ export default {
             {
                 slug: 'action',
                 title: 'Ação',
-                items: await  basicFetch(`/discover/movie??with-network=28&language=pt-BR&api_key=${API_kEY}`)
+                items: await basicFetch(`/discover/movie?with_genres=28&language=pt-BR&api_key=${API_kEY}`)
             },
             {
                 slug: 'comedy',
                 title: 'Comédia',
-                items: await basicFetch(`/discover/movie??with-network=35&language=pt-BR&api_key=${API_kEY}`)
+                items: await basicFetch(`/discover/movie?with_genres=35&language=pt-BR&api_key=${API_kEY}`)
             },
             {
                 slug: 'horror',
                 title: 'Terror',
-                 items: await basicFetch(`/discover/movie??with-network=27&language=pt-BR&api_key=${API_kEY}`)
+                items: await basicFetch(`/discover/movie?with_genres=27&language=pt-BR&api_key=${API_kEY}`)
             },
             {
                 slug: 'romance',
                 title: 'Romance',
-                 items: await basicFetch(`/discover/movie??with-network=10749&language=pt-BR&api_key=${API_kEY}`)
+                items: await basicFetch(`/discover/movie?with_genres=10749&language=pt-BR&api_key=${API_kEY}`)
             },
             {
                 slug: 'documentary',
                 title: 'Documentarios',
-                 items: await basicFetch(`/discover/movie??with-network=99&language=pt-BR&api_key=${API_kEY}`)
+                items: await basicFetch(`/discover/movie?with_genres=99&language=pt-BR&api_key=${API_kEY}`)
             },
-        ]
+        ];
+    },
+    getMOvieInfo: async (movieId, type) => {
+        let info = {};
+
+        if (movieId) {
+            switch (type) {
+                case 'movie':
+                    info = await basicFetch(`/movie/${movieId}?languages=pt-BR&api_key=${API_kEY}`);
+                    break;
+                case 'tv':
+                    info = await basicFetch(`/tv/${movieId}?languages=pt-BR&api_key=${API_kEY}`);
+                    break;
+                default:
+                    info = null;
+                    break;
+            }
+        }
+
+        return info;
     }
 }
