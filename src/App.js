@@ -22,11 +22,9 @@ export default () => {
       // Pegando o Featured
       let originals = list.filter(i => i.slug === "originals");
       // Multiplica um numero aleatorio pelo valor da lista de originals menos 1
-      let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1));
-      let chosen = originals[0].items.results[randomChosen]
-
-      let chosenInfo = await Tmdb.getMOvieInfo(chosen.id, 'tv')
-
+      let randonChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1));
+      let chosen = originals[0].items.results[randonChosen]
+      let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeaturedData(chosenInfo);
     }
     loadAll();
@@ -65,7 +63,7 @@ export default () => {
         Direitos de imagem para Netflix<br />
         Dados pegos do site Themoviedb.org
       </footer>
-      
+
       {movieList.length <= 0 &&
         <div className="loading">
           <img src="https://cdn.lowgif.com/small/0534e2a412eeb281-the-counterintuitive-tech-behind-netflix-s-worldwide.gif" alt="loading"></img>
